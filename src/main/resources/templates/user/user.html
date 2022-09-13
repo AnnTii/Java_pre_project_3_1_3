@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" class="h-100"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS (Cloudflare CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css"
+          integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- jQuery (Cloudflare CDN) -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Bootstrap Bundle JS (Cloudflare CDN) -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/js/bootstrap.min.js"
+            integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>User Page</title>
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <p class="navbar-brand text-white">
+        <b>&nbsp;&nbsp;&nbsp;<span class="align-middle" th:text="${user.email}"></span></b>
+        <span class="align-middle">with roles:</span>
+        <span class="align-middle" th:each="role : ${user.getRoles()}"
+              th:text="${role.getRoleName().replace('ROLE_', '')}"></span>
+    </p>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-dark text-secondary">Logout</button>
+    </form>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 bg-white text-dark">
+            <br/>
+            <nav>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-left mx-lg-n3" style="width: 321px; height: 43px;"
+                           href="#">User <span class="badge badge-secondary"></span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-10 bg-light text-dark" style="padding-bottom: 750px;">
+            <div class="container col-md-10">
+                <br><br>
+                <h1>User information-page</h1>
+                <div class="tab-content ">
+                    <div id="tableUsers"
+                         class="container tab-pane active col-12 py-0 px-lg-4 border bg-white text-dark">
+                        <div class="font-weight-bold py-2 px-lg-4 mx-lg-n4 pt-0 border bg-light text-dark">About
+                            user
+                        </div>
+                        <p>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Age</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="user : ${user}">
+                                <td th:text="${user.getId()}"></td>
+                                <td th:text="${user.getName()}"></td>
+                                <td th:text="${user.getLastName()}"></td>
+                                <td th:text="${user.getAge()}"></td>
+                                <td th:text="${user.getEmail()}"></td>
+                                <td>
+                                    <div th:each="role : ${user.getRoles()}"
+                                         th:text="${role.getRoleName().replace('ROLE_', '')}">
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
