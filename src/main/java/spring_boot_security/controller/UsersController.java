@@ -6,15 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/user")
 public class UsersController {
 
-    @GetMapping("/login")
-    public String getLoginPage() {
-        return "/user/login";
-    }
-
-    @GetMapping("/user")
+    @GetMapping
     public String getCurrentUserInfo(Model model) {
         model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "/user/user";
