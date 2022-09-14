@@ -25,7 +25,7 @@ public class AdminController {
         model.addAttribute("allUsers", userService.getAllUsers());
         model.addAttribute("authenticatedUser", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("newUser", new User());
-        return "/admin/admin";
+        return "/admin";
     }
 
     @PostMapping("/addNewUser")
